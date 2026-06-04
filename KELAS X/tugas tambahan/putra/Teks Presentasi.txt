@@ -1,0 +1,297 @@
+================================================================================
+          NASKAH PRESENTASI
+          PORTFOLIO WEBSITE - FULLSTACK (LARAVEL & REACT)
+          Oleh: Putra Akbar
+================================================================================
+
+
+========================================
+SLIDE 1 - PEMBUKAAN
+========================================
+
+Assalamualaikum Warahmatullahi Wabarakatuh. Selamat pagi/siang/sore semuanya.
+
+Hari ini, saya ingin mempresentasikan hasil pengerjaan tugas tambahan saya.
+Saya telah merancang dan membangun sebuah Website Portfolio pribadi. Proyek 
+ini mengadopsi pendekatan Fullstack development, di mana saya menggunakan 
+Laravel untuk sisi backend dan React.js untuk sisi frontend.
+
+Langsung saja kita mulai pembahasannya.
+
+
+========================================
+SLIDE 2 - LATAR BELAKANG & TUJUAN
+========================================
+
+Di zaman serba digital ini, memiliki eksistensi online sangatlah esensial, 
+khususnya bagi kita yang berkecimpung di dunia software development. 
+Portfolio digital ibarat sebuah resume interaktif yang memperlihatkan 
+keterampilan, pengalaman, dan karya-karya kita kepada audiens global.
+
+Adapun tujuan dari pembuatan proyek ini meliputi:
+1. Membangun platform portfolio yang elegan, kekinian, dan bisa diakses 
+   dengan nyaman dari berbagai perangkat.
+2. Mengaplikasikan pola arsitektur Fullstack modern dengan memisahkan logic 
+   frontend dan backend (decoupled).
+3. Membuat halaman khusus admin yang dilindungi oleh sistem autentikasi.
+4. Menambahkan fitur formulir kontak agar siapa saja bisa dengan mudah 
+   menghubungi saya.
+
+
+========================================
+SLIDE 3 - TEKSTAK (TECHNOLOGY STACK)
+========================================
+
+Untuk merealisasikan proyek ini, saya mengkombinasikan beberapa teknologi 
+yang handal:
+
+BACKEND (Sisi Server):
+- Laravel 11 — Framework PHP andalan untuk menyajikan REST API.
+- Laravel Sanctum — Menangani urusan login dan autentikasi via token.
+- SQLite — Solusi database yang praktis dan efisien untuk menyimpan data.
+- Eloquent ORM — Memudahkan saya dalam berinteraksi dengan tabel database.
+
+FRONTEND (Sisi Klien):
+- React.js 18 — Library JavaScript populer untuk merancang User Interface.
+- React Router DOM — Mengatur perpindahan halaman secara dinamis (SPA).
+- Framer Motion — Memberikan sentuhan animasi dan transisi yang memukau.
+- Lucide React — Kumpulan ikon berdesain minimalis dan modern.
+- Vite — Engine untuk proses build yang sangat responsif dan cepat.
+
+ARSITEKTUR:
+- Sistem Frontend dan Backend berdiri sendiri-sendiri (decoupled).
+- Pertukaran data dijembatani oleh REST API.
+- Secara default, Frontend berjalan di port 5173 dan Backend di port 8000.
+
+
+========================================
+SLIDE 4 - FITUR UNGGULAN
+========================================
+
+Website ini dilengkapi dengan sederet fitur menarik, di antaranya:
+
+1. HALAMAN BERANDA (Landing Page)
+   - Bagian atas (Hero) menampilkan sapaan, identitas saya sebagai Fullstack 
+     Developer, serta deskripsi padat yang dibalut animasi.
+   - Tersedia tombol "Lihat Proyek" dan "Download CV" untuk akses instan.
+
+2. PROFIL SAYA (About)
+   - Berisi sekilas tentang siapa saya dan bagaimana cara kerja saya.
+   - Dilengkapi dengan 3 highlight: Frontend, Backend, dan prinsip Clean Code.
+
+3. KARYA & PROYEK (Projects)
+   - Menampilkan koleksi karya yang datanya di-fetch langsung dari backend.
+   - Setiap item memuat thumbnail, penjelasan, dan daftar teknologi yang dipakai.
+   - Ada sistem data cadangan (fallback) seandainya koneksi API terputus.
+
+4. KETERAMPILAN (Skills)
+   - Memetakan kemampuan saya ke dalam kategori Frontend, Backend, dan Tools.
+   - Disertai indikator bar visual yang menunjukkan seberapa mahir saya 
+     di masing-masing bidang. Data ini pun bersumber dari API.
+
+5. HUBUNGI SAYA (Contact)
+   - Formulir interaktif untuk mengirimkan pesan berisi Nama, Email, dan Isi Pesan.
+   - Pesan akan masuk ke database backend secara aman melalui API.
+   - Muncul pemberitahuan (alert) apakah pesan sukses atau gagal dikirim.
+
+6. AUTENTIKASI ADMIN (Login & Register)
+   - Tampilan login bergaya glassmorphism yang cantik.
+   - Proses verifikasi berlapis, baik di browser maupun di server, 
+     menggunakan Laravel Sanctum.
+
+7. DASHBOARD ADMIN (Area Terbatas)
+   - Ruang khusus yang mewajibkan pengguna untuk login terlebih dahulu.
+   - Menampilkan data profil admin.
+   - Memudahkan admin untuk membaca pesan-pesan yang dikirim oleh pengunjung.
+   - Tersedia opsi untuk keluar akun (Logout).
+
+
+========================================
+SLIDE 5 - STRUKTUR DIREKTORI
+========================================
+
+Pemisahan (decoupling) terlihat jelas dari bagaimana folder proyek ini ditata:
+
+Porto-Laravel-React/
+├── backend/          --> Aplikasi Laravel (REST API)
+│   ├── app/
+│   │   └── Http/Controllers/Api/
+│   │       ├── AuthController.php      (Manajemen User)
+│   │       ├── ProjectController.php   (Endpoint Karya)
+│   │       ├── SkillController.php     (Endpoint Keterampilan)
+│   │       └── ContactController.php   (Endpoint Pesan)
+│   ├── database/
+│   │   └── migrations/                 (Skema untuk users, projects, dll)
+│   └── routes/
+│       └── api.php                     (Kumpulan jalur akses/endpoints)
+│
+├── frontend/         --> Aplikasi React.js (Tampilan)
+│   └── src/
+│       ├── components/
+│       │   ├── Navbar.jsx    (Menu Navigasi)
+│       │   ├── Hero.jsx      (Seksi Utama)
+│       │   ├── About.jsx     (Seksi Profil)
+│       │   ├── Projects.jsx  (Daftar Proyek)
+│       │   ├── Skills.jsx    (Daftar Keterampilan)
+│       │   ├── Contact.jsx   (Seksi Formulir)
+│       │   ├── Login.jsx     (Halaman Masuk)
+│       │   ├── Register.jsx  (Halaman Daftar)
+│       │   ├── Dashboard.jsx (Halaman Kelola)
+│       │   └── Footer.jsx    (Bagian Bawah)
+│       ├── context/
+│       │   └── AuthContext.jsx (Pengatur State Login)
+│       └── App.jsx             (Induk Komponen)
+
+
+========================================
+SLIDE 6 - DAFTAR ENDPOINT API
+========================================
+
+Backend Laravel menyediakan rute-rute berikut untuk diakses:
+
+JALUR UMUM (Tidak Perlu Login):
+- POST   /api/register     --> Mendaftarkan admin baru
+- POST   /api/login        --> Mengautentikasi dan merilis token
+- GET    /api/projects     --> Meminta sekumpulan data proyek
+- GET    /api/skills       --> Meminta daftar keahlian
+- POST   /api/contacts     --> Mengirimkan pesan baru
+
+JALUR KHUSUS (Wajib Bearer Token):
+- GET    /api/me           --> Memeriksa informasi pengguna aktif
+- POST   /api/logout       --> Menghancurkan token dan keluar sesi
+- GET    /api/contacts     --> Mengambil semua pesan masuk untuk dibaca admin
+
+
+========================================
+SLIDE 7 - ESTETIKA & PENGALAMAN PENGGUNA
+========================================
+
+Saya memberikan perhatian khusus pada aspek visual agar web ini tidak membosankan:
+
+1. TEMA GELAP (Dark Mode) — Memakai palet warna gelap (dominan #0F172A) 
+   agar terlihat elegan dan tidak menyilaukan mata.
+
+2. ANIMASI INTERAKTIF — Memanfaatkan Framer Motion untuk menghasilkan 
+   animasi kemunculan (scroll reveal), efek saat mouse mendekat (hover), 
+   dan pergerakan antar halaman.
+
+3. EFEK KACA (Glassmorphism) — Desain tembus pandang yang memberikan 
+   ilusi kedalaman pada elemen seperti kartu dan formulir.
+
+4. DESAIN FLEKSIBEL (Responsive) — Memastikan tata letak tetap rapi 
+   meskipun dibuka dari layar smartphone, tablet, ataupun monitor besar.
+
+5. SPA (Single Page Application) — Perpindahan antar menu terasa instan 
+   tanpa ada jeda loading ulang halaman (reload).
+
+
+========================================
+SLIDE 8 - ASPEK KEAMANAN
+========================================
+
+Meski sederhana, keamanan tetap menjadi prioritas:
+
+1. AUTENTIKASI BERBASIS TOKEN
+   - Sanctum memfasilitasi penerbitan Token Akses Personal.
+   - Rute-rute rahasia mensyaratkan token ini disisipkan pada Authorization header.
+
+2. ENKRIPSI KATA SANDI
+   - Semua kata sandi diacak oleh algoritma bcrypt. Database sama sekali 
+     tidak menyimpan kata sandi dalam bentuk teks asli.
+
+3. PEMBATASAN HALAMAN
+   - Akses ke Dashboard diproteksi ketat.
+   - Pengunjung yang belum login akan langsung dilempar kembali ke halaman Login.
+
+4. FILTERING INPUT
+   - Pemeriksaan data berlapis ganda; mulai dari peringatan di browser (frontend) 
+     hingga validasi solid di tingkat server (backend).
+
+5. PENCABUTAN TOKEN
+   - Saat proses otentikasi baru, token lama otomatis hangus guna meminimalisir 
+     resiko pembajakan sesi.
+
+
+========================================
+SLIDE 9 - KENDALA & PEMECAHAN MASALAH
+========================================
+
+Dalam proses pengerjaannya, saya menemui beberapa rintangan:
+
+1. INTEGRASI DUA DUNIA
+   Kendala: Laravel (port 8000) menolak permintaan dari React (port 5173) 
+   karena perlindungan CORS.
+   Solusi: Melakukan penyesuaian di pengaturan CORS Laravel agar mengizinkan 
+   koneksi dari domain frontend.
+
+2. PENGELOLAAN STATUS LOGIN
+   Kendala: Bagaimana memastikan komponen manapun tahu apakah user sudah login?
+   Solusi: Mengimplementasikan Context API bawaan React untuk menyebarkan 
+   data user dan token ke seluruh penjuru aplikasi.
+
+3. MENGANTISIPASI API DOWN
+   Kendala: Jika backend mati atau database kosong, tampilan web bisa hancur.
+   Solusi: Menyiapkan data dumi (dummy data) yang otomatis tayang sebagai 
+   pengganti ketika API gagal memberikan respons yang diharapkan.
+
+
+========================================
+SLIDE 10 - SESI DEMONSTRASI (OPSIONAL)
+========================================
+
+[Area khusus untuk mempraktikkan aplikasi secara langsung]
+
+Mari kita uji coba aplikasi web ini bersama-sama:
+
+1. Kita mulai dari melihat tampilan Beranda secara keseluruhan.
+2. Lalu kita eksplorasi bagian Profil, Proyek, dan Keterampilan.
+3. Saya akan mendemonstrasikan pengisian Formulir Kontak.
+4. Setelah itu, saya akan masuk (login) sebagai Admin untuk mengecek 
+   pesan yang baru saja kita kirim.
+5. Dan diakhiri dengan menekan tombol Logout.
+
+
+========================================
+SLIDE 11 - RANGKUMAN
+========================================
+
+Kesimpulan dari pengerjaan proyek portofolio ini adalah:
+
+1. Saya sukses mengawinkan React.js (Frontend) dan Laravel (Backend) 
+   yang saling berkomunikasi via pertukaran data JSON (REST API).
+
+2. Fungsionalitas inti mulai dari etalase portofolio, formulir komunikasi, 
+   hingga dashboard admin dengan keamanannya dapat berjalan sesuai rencana.
+
+3. Proyek ini memberikan saya banyak pembelajaran, terutama dalam:
+   - Merancang dan memproteksi REST API.
+   - Menguasai konsep SPA (Single Page Application).
+   - Memahami manajemen state dalam React.
+   - Meracik animasi dan desain antarmuka yang responsif.
+
+4. Penerapan teknologi kekinian seperti ini membuktikan bahwa kita mampu 
+   menciptakan aplikasi yang tidak hanya cantik secara visual, tapi juga 
+   aman dan berkinerja tinggi.
+
+
+========================================
+SLIDE 12 - AKHIR KATA
+========================================
+
+Itulah penjabaran mengenai proyek Website Portfolio Fullstack yang telah 
+saya rampungkan.
+
+Saya sadar masih banyak ruang untuk penyempurnaan, misalnya dengan 
+menyediakan menu penambahan data proyek (CRUD) langsung dari dashboard, 
+atau mengunggahnya ke server online (deployment) agar bisa diakses secara publik.
+
+Jika ada hal yang ingin didiskusikan atau ditanyakan, saya persilakan.
+
+Terima kasih atas waktu dan perhatian Bapak/Ibu serta teman-teman semua.
+
+Wassalamualaikum Warahmatullahi Wabarakatuh.
+
+
+================================================================================
+                           ~ TERIMA KASIH ~
+================================================================================
